@@ -1,0 +1,7 @@
+= Asciidoctor Maven Plugin: Asciidoc to reveal.js
+
+== Usage
+ $ mvn
+
+Generated file:
+_target/generated-slides/slides.html_

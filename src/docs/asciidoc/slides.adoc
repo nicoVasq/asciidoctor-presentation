@@ -1,0 +1,213 @@
+= Dokumentation, Logging
+
+ifndef::imagesdir[:imagesdir: images]
+
+:icons: font
+//:source-highlighter: coderay
+
+
+== Warum Dokumentation?
+[%step]
+* Überschaubarkeit
+* Weiterentwicklung
+
+== Tools
+
+=== AsciiDoctor
+[%step]
+* AsciiDoc ≠ AsciiDoctor
+
+=== !
+
+[cols="1s,1",frame=none, grid=none, stripes=none, %rotate]
+|===
+|icon:file[] Asciidoc :
+|Syntax
+
+|icon:wrench[] AsciiDoctor  : +
+|Parser + Tools
+|===
+
+== Attribute definieren
+
+[source,asciidoc]
+----
+:source-dir: src/main/java
+
+
+Die Source-Files befinden sich unter {source-dir}.
+----
+
+== Source Code
+
+[source,asciidoc]
+----
+ :source-highlighter: coderay
+
+ [source, java]
+ ----
+ public class HelloWorld {
+    public static void main(String args[]) {
+        System.out.println("Hello World!"); <1>
+    }
+ }
+ ----
+ <1> Gibt "Hello World!" aus.
+----
+
+=== Ergebnis
+
+[source, java]
+----
+public class HelloWorld {
+    public static void main(String args[]) {
+        System.out.println("Hello World!"); <1>
+    }
+}
+----
+<1> Gibt "Hello World!" aus.
+
+
+=== Source Code einbinden
+[source,asciidoc]
+----
+ [source, ...]
+ ----
+ include::path/to/your/file[]
+ ----
+----
+
+https://github.com/asciidoctor/asciidoctor.org/blob/master/docs/_includes/include-lines-tags.adoc[Doku - Include source code]
+
+=== Source Code mit Tags (1)
+
+[source,asciidoc]
+include::tagExample.adoc[]
+
+=== Source Code mit Tags (2)
+[source,asciidoc]
+----
+ [source, ...]
+ ----
+ include::path/to/your/file[tags=sayHello] <1>
+ ----
+----
+<1> Festlegen, welches Tag angezeigt werden soll
+
+== Note, Important, ..
+[source,asciidoc]
+----
+ NOTE: Asciidoctor has a lot of features
+
+ IMPORTANT: You can create slides with Asciidoctor
+
+ WARNING: You need an extra library for rendering diagrams
+----
+
+== Multimedia
+[cols="1s,1",frame=none,grid=none, stripes=none]
+|===
+
+|Image
+| `image::myImage.png[size=50%]`
+
+|Icon
+| `\icon:file[2x]`
+
+|Video
+| `video::SCZF6I­Rc4I[youtube,853,480]`
+
+|===
+== AsciiDoctor Maven Plugin
+
+[source,xml]
+----
+<plugins>
+    <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
+        <version>1.5.6</version>
+        ...
+    </plugin>
+</plugins>
+----
+
+https://asciidoctor.org/docs/asciidoctor-maven-plugin/
+
+=== AsciiDoctor Slides mit Maven
+[source,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>rubygems</groupId>
+        <artifactId>asciidoctor-revealjs</artifactId>
+        <version>3.0.0</version>
+        <type>gem</type>
+        ...
+    </dependency>
+</dependencies>
+----
++ weitere Plugins
+
+http://torquebox.org/development/maven-mechanics/
+
+
+== Logging
+
+Was sagt logging aus?
+
+[%step]
+* Was gerade passiert
+
+== Log4J 2
+Logging Library
+
+=== Konfiguration
+
+Konfigurations Datei:
+
+log4j2
+
+* .properties
+* .xml
+* .json
+* .yaml
+
+=== Logging Level
+Nicht alle Log-Nachrichten werden identisch erstellt.
+
+* TRACE
+* DEBUG
+* INFO
+* WARN
+* ERROR
+* FATAL
+
+https://logging.apache.org/log4j/2.x/log4j-api/apidocs/index.html
+
+=== Appender
+
+Zuständig für das Verbreiten der Logging-Informationen
+[%step]
+* Console, File, Email, ...
+
+=== Logger
+
+Zuständig für das Erstellen der Logging-Informationen. +
+Liefert sie an den Appender.
+
+=== !
+
+image::logging.png[background, size=70%]
+
+
+
+== SLF4J
+Logging Facades
+
+=== !
+
+image::facades.png[background, size=70%]
+
+
+

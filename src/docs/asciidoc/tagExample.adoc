@@ -1,0 +1,16 @@
+[source, java]
+----
+public class HelloWorld {
+    public static void main(String args[]) {
+        sayHello();
+    }
+
+    // tag::sayHello[] <1>
+    public void sayHello(){
+        System.out.println("Hello");
+    }
+    // end::sayHello[]  <2>
+}
+----
+<1> Tag-Anfang
+<2> Tag-Ende
