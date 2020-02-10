@@ -9,7 +9,7 @@
     <description>Example project that generates slides from an adoc file using the asciidoc-revealjs gem</description>
 
     <properties>
-        <project.slides.directory>${project.build.directory}/generated-slides</project.slides.directory>
+        <project.slides.directory>docs/</project.slides.directory>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -53,7 +53,7 @@
             </extension>
         </extensions>
         <plugins>
-            <!-- Plugin for downloading the required reveal.js Files -->
+            <!-- Plugin for downloading the required reveal.js files -->
             <plugin>
                 <groupId>com.googlecode.maven-download-plugin</groupId>
                 <artifactId>download-maven-plugin</artifactId>
@@ -75,6 +75,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Plugin for processing gems -->
             <plugin>
                 <groupId>de.saumya.mojo</groupId>
                 <artifactId>gem-maven-plugin</artifactId>
@@ -96,12 +97,14 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Asciidoctor Plugin -->
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
                 <version>${asciidoctor.maven.plugin.version}</version>
                 <configuration>
                     <sourceDirectory>src/docs/asciidoc</sourceDirectory>
+                    <sourceDocumentName>slides.adoc</sourceDocumentName>
                 </configuration>
                 <executions>
                     <execution>
@@ -117,6 +120,7 @@
                                 <require>asciidoctor-revealjs</require>
                             </requires>
                             <outputDirectory>${project.slides.directory}</outputDirectory>
+                            <outputFile>index.html</outputFile>
                             <backend>revealjs</backend>
                             <sourceHighlighter>coderay</sourceHighlighter>
                             <attributes>
@@ -126,7 +130,7 @@
                                 <revealjsdir>reveal.js-${revealjs.version}</revealjsdir>
                                 <!-- reveal.js specific attributes -->
                                 <sourcedir>${basedir}/src/main/java</sourcedir>
-                                <revealjs_theme>black</revealjs_theme>
+                                <revealjs_theme>white</revealjs_theme>
                                 <revealjs_transition>linear</revealjs_transition>
                                 <project-version>${project.version}</project-version>
                                 <coderay-css>style</coderay-css>
